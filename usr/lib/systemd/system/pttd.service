@@ -1,0 +1,11 @@
+[Unit]
+Description=Global Push-To-Talk Service
+
+[Service]
+Type=dbus
+BusName=com.github.ma1thew.pttd
+ExecStart=/usr/bin/pttd
+Environment="PYTHONPATH=/usr/share/pttd/"
+
+[Install]
+WantedBy=graphical.target

@@ -1,0 +1,47 @@
+#!/usr/bin/python3
+import dbus
+from gi.repository import GLib
+from dbus.mainloop.glib import DBusGMainLoop
+import atexit
+import pulsectl
+
+OBJECT_PATH='/com/github/ma1thew/pttd'
+INTERFACE_NAME='com.github.ma1thew.pttd'
+BUS_NAME='com.github.ma1thew.pttd'
+
+DEFAULT_VOLUME=1
+MUTE_VOLUME=0
+
+pulse = pulsectl.Pulse('ptt-client')
+
+def OnKeyUp():
+    setVolume(MUTE_VOLUME)
+
+def OnKeyDown():
+    setVolume(DEFAULT_VOLUME)
+
+def setVolume(value):
+    defaultSource = pulse.server_info().default_source_name
+    for source in pulse.source_list():
+        if source.name == defaultSource:
+            volume = source.volume
+            volume.value_flat = value
+            pulse.volume_set(source, volume)
+
+def cleanup():
+    setVolume(DEFAULT_VOLUME)
+    pulse.close()
+    GLib.MainLoop().quit()
+
+setVolume(MUTE_VOLUME)
+
+DBusGMainLoop(set_as_default=True)
+bus = dbus.SystemBus()
+
+bus.add_signal_receiver(path=OBJECT_PATH, handler_function=OnKeyUp, dbus_interface=INTERFACE_NAME, signal_name='KeyUp')
+bus.add_signal_receiver(path=OBJECT_PATH, handler_function=OnKeyDown, dbus_interface=INTERFACE_NAME, signal_name='KeyDown')
+
+try:
+    GLib.MainLoop().run()
+except:
+    pass

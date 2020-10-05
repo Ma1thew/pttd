@@ -1,0 +1,10 @@
+[Unit]
+Description=Global Push-To-Talk Client
+Wants=pulseaudio.service
+
+[Service]
+Type=exec
+ExecStart=/usr/bin/ptt-client
+
+[Install]
+WantedBy=default.target
