@@ -11,6 +11,7 @@ Requires:       python3
 Requires:       python3-gobject
 Requires:       python3-dbus
 Requires:       python3-pulsectl
+Requires:	python3-simpleaudio
 
 BuildArch:      noarch
 
@@ -36,6 +37,8 @@ cp -a * %{buildroot}
 /usr/share/dbus-1/system.d/com.github.ma1thew.pttd.conf
 /usr/lib/systemd/system/pttd.service
 /usr/lib/systemd/user/ptt-client.service
+/usr/share/pttd/activate.wav
+/usr/share/pttd/deactivate.wav
 /usr/share/pttd/keyboard/LICENSE
 /usr/share/pttd/keyboard/__init__.py
 /usr/share/pttd/keyboard/__main__.py

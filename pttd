@@ -15,6 +15,7 @@ class PttdServiceObject(dbus.service.Object):
         dbus.service.Object.__init__(self, dbus.service.BusName(BUS_NAME, bus=dbus.SystemBus()), OBJECT_PATH)
         keyboard.on_press_key(key_id, self.EmitKeyDown)
         keyboard.on_release_key(key_id, self.EmitKeyUp)
+        self._keyIsDown = False
 
     @dbus.service.signal(INTERFACE_NAME)
     def KeyUp(self):
@@ -26,9 +27,12 @@ class PttdServiceObject(dbus.service.Object):
 
     def EmitKeyUp(self, keyEvent):
         self.KeyUp()
+        self._keyIsDown = False
 
     def EmitKeyDown(self, keyEvent):
-        self.KeyDown()
+        if not self._keyIsDown:
+            self.KeyDown()
+            self._keyIsDown = True
 
 def cleanup():
     print("Exiting...")

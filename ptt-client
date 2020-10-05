@@ -4,6 +4,7 @@ from gi.repository import GLib
 from dbus.mainloop.glib import DBusGMainLoop
 import atexit
 import pulsectl
+import simpleaudio
 
 OBJECT_PATH='/com/github/ma1thew/pttd'
 INTERFACE_NAME='com.github.ma1thew.pttd'
@@ -12,13 +13,20 @@ BUS_NAME='com.github.ma1thew.pttd'
 DEFAULT_VOLUME=1
 MUTE_VOLUME=0
 
+PTT_ACTIVATE_SOUND='/usr/share/pttd/activate.wav'
+PTT_DEACTIVATE_SOUND='/usr/share/pttd/deactivate.wav'
+
 pulse = pulsectl.Pulse('ptt-client')
+pttActivate = simpleaudio.WaveObject.from_wave_file(PTT_ACTIVATE_SOUND)
+pttDeactivate = simpleaudio.WaveObject.from_wave_file(PTT_DEACTIVATE_SOUND)
 
 def OnKeyUp():
     setVolume(MUTE_VOLUME)
+    pttDeactivate.play()
 
 def OnKeyDown():
     setVolume(DEFAULT_VOLUME)
+    pttActivate.play()
 
 def setVolume(value):
     defaultSource = pulse.server_info().default_source_name

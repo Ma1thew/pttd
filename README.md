@@ -21,4 +21,4 @@ At present, pttd is uses a fixed key (alt), and there is no support for external
 
 ## License
 
-Code in `usr/share/pttd/keyboard` is under the MIT License, originally from https://github.com/boppreh/keyboard, and is provided here for easy packaging. All other content is under the WTFPL (see `LICENSE`).
+Code in `usr/share/pttd/keyboard` is under the MIT License, originally from https://github.com/boppreh/keyboard, and is provided here for easy packaging. `usr/share/pttd/{,de}activate.wav` are from `https://www.reddit.com/r/discordapp/comments/4ytdf0/where_are_sound_files_stored/`. All other content is under the WTFPL (see `LICENSE`).
