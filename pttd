@@ -40,7 +40,7 @@ def cleanup():
 
 if __name__ == '__main__':
     DBusGMainLoop(set_as_default=True)
-    dbus_service = PttdServiceObject('alt')
+    dbus_service = PttdServiceObject(56)
     atexit.register(cleanup)
     try:
         GLib.MainLoop().run()
