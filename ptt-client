@@ -41,6 +41,8 @@ bus = dbus.SystemBus()
 bus.add_signal_receiver(path=OBJECT_PATH, handler_function=OnKeyUp, dbus_interface=INTERFACE_NAME, signal_name='KeyUp')
 bus.add_signal_receiver(path=OBJECT_PATH, handler_function=OnKeyDown, dbus_interface=INTERFACE_NAME, signal_name='KeyDown')
 
+atexit.register(cleanup)
+
 try:
     GLib.MainLoop().run()
 except:
