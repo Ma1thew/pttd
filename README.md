@@ -19,3 +19,6 @@ Just start and enable `pttd.service` system-wide and start and enable `ptt-clien
 
 At present, pttd is uses a fixed key (alt), and there is no support for external configuration. There is also no way to temporarily disable PTT outside of stopping `ptt-client`. To change the key, edit `pttd`.
 
+## License
+
+Code in `usr/share/pttd/keyboard` is under the MIT License, originally from https://github.com/boppreh/keyboard, and is provided here for easy packaging. All other content is under the WTFPL (see `LICENSE`).
