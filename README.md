@@ -17,7 +17,7 @@ Just start and enable `pttd.service` system-wide and start and enable `ptt-clien
 
 ## Missing Functionality
 
-At present, pttd is uses a fixed key (alt), and there is no support for external configuration. There is also no way to temporarily disable PTT outside of stopping `ptt-client`. To change the key, edit `pttd`.
+At present, pttd is uses a fixed key (alt) and fixed list of known voice-chat software (Discord) for which sounds are played, and there is no support for external configuration. There is also no way to temporarily disable PTT outside of stopping `ptt-client`. To change the key, edit `pttd`.
 
 ## License
 
