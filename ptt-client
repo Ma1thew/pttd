@@ -50,6 +50,7 @@ setVolume(MUTE_VOLUME)
 DBusGMainLoop(set_as_default=True)
 bus = dbus.SystemBus()
 
+dbus.Interface(bus.get_object(BUS_NAME, OBJECT_PATH), INTERFACE_NAME).RegisterHooks()
 bus.add_signal_receiver(path=OBJECT_PATH, handler_function=OnKeyUp, dbus_interface=INTERFACE_NAME, signal_name='KeyUp')
 bus.add_signal_receiver(path=OBJECT_PATH, handler_function=OnKeyDown, dbus_interface=INTERFACE_NAME, signal_name='KeyDown')
 

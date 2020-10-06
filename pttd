@@ -13,9 +13,13 @@ class PttdServiceObject(dbus.service.Object):
 
     def __init__(self, key_id):
         dbus.service.Object.__init__(self, dbus.service.BusName(BUS_NAME, bus=dbus.SystemBus()), OBJECT_PATH)
-        keyboard.on_press_key(key_id, self.EmitKeyDown)
-        keyboard.on_release_key(key_id, self.EmitKeyUp)
         self._keyIsDown = False
+        self._keyID = key_id
+
+    @dbus.service.method(INTERFACE_NAME)
+    def RegisterHooks(self):
+        keyboard.on_press_key(self._keyID, self.EmitKeyDown)
+        keyboard.on_release_key(self._keyID, self.EmitKeyUp)
 
     @dbus.service.signal(INTERFACE_NAME)
     def KeyUp(self):
